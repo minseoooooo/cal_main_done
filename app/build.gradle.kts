@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -40,6 +42,9 @@ android {
     viewBinding {
         enable = true
     }
+    dataBinding {
+        enable = true
+    }
 }
 
 
@@ -65,5 +70,24 @@ dependencies {
     //implementation("com.google.firebase:firebase-auth:22.0.0")
     implementation("com.google.firebase:firebase-bom:32.0.0")
     implementation("com.google.android.gms:play-services-auth:20.5.0")
+
+
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+    val roomVersion = "2.6.1"
+    // Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    // Room 코루틴
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    val lifecycleVersion = "2.3.0"
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    // LiveData - 데이터의 변경 사항 파악
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+
+    // 뷰모델 생성하기 쉽게
+    implementation("androidx.fragment:fragment-ktx:1.1.0")
+
 
 }
