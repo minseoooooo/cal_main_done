@@ -89,5 +89,8 @@ dependencies {
     // 뷰모델 생성하기 쉽게
     implementation("androidx.fragment:fragment-ktx:1.1.0")
 
+    //메인 슬라이딩 view
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+    implementation ("me.relex:circleindicator:2.1.6")
 
 }

@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item1"
+        android:id="@+id/ToCalendarButtonInMenu"
         android:enabled="true"
         android:title="메뉴1"
         android:icon="@drawable/baseline_calendar_month_24"
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/item2"
+        android:id="@+id/ToMypageButtonInMenu"
         android:enabled="true"
         android:icon="@drawable/baseline_person_24"
         android:title="메뉴2"

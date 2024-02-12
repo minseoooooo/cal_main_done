@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <android.widget.Button
+        android:layout_width="340dp"
+        android:layout_height="110dp"
+        android:drawableRight="@drawable/heartratepic"
+        android:background="@drawable/slidingcustom"
+        android:text="개인 운동 추천"
+        android:paddingEnd="35dp"
+        android:paddingLeft="35dp"
+        android:textColor="@color/black"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/white"
+        />
+
+
+
+</LinearLayout>
