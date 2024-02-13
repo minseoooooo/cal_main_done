@@ -1,41 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:background="#EAEAEA">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.293" />
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white"
+        android:background="@color/mint"
+        app:menu="@menu/top_nav">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/signin_btn"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+    </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DisplayName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signin_btn" />
+    <!-- FrameLayout 추가 -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
+        <!-- 버튼들을 감싸는 LinearLayout 추가 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
 
+            <android.widget.Button
+                android:id="@+id/ToPERlistButton"
+                android:layout_width="340dp"
+                android:layout_height="100dp"
+                android:drawableRight="@drawable/heartratepic"
+                android:background="@drawable/slidingcustom"
+                android:layout_gravity="center"
+                android:text="개인 운동 추천"
+                android:paddingEnd="35dp"
+                android:paddingLeft="35dp"
+                android:textColor="@color/black"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/white"
+                />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <android.widget.Button
+                android:id="@+id/ToTodayERButton"
+                android:layout_width="340dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/trophypic"
+                android:background="@drawable/slidingcustom"
+                android:text="오늘의 운동 추천"
+                android:layout_marginTop="30dp"
+                android:paddingEnd="35dp"
+                android:paddingLeft="35dp"
+                android:textColor="@color/black"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/white"
+                />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
