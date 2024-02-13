@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SolutionChallenge"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.UserEditActivity"
+            android:name=".activity.UserEditActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LogInActivity"
+            android:name=".activity.LogInActivity"
             android:exported="false" />
 
     </application>

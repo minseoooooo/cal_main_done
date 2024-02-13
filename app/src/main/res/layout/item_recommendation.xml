@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="exercise"
+            type="com.example.solutionchallenge.datamodel.Exercise" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/PERNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{exercise.name}"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/PERTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="@{String.valueOf(exercise.time)}"
+            android:textColor="#7A7575"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/PERNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/PERNameTextView" />
+
+        <Button
+            android:id="@+id/ToRecommendationDetailDialogButton"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:backgroundTint="@color/main"
+            android:padding="0dp"
+            android:text="Read more"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/BookmarkCheckButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <CheckBox
+            android:id="@+id/BookmarkCheckButton"
+            android_button="@null"
+            android:background="@drawable/bookmark_checkbox_custom"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:checked="@{exercise.bookmarked}"
+            android:layout_marginRight="13dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </CheckBox>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

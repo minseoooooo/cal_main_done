@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/round_log"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="600dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/RecommendNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="운동 이름"
+            android:textStyle="bold"
+            android:textSize="23sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/RecommendTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recommend time :"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendNameTextView"
+            app:layout_constraintStart_toStartOf="@id/RecommendNameTextView"
+            />
+
+        <TextView
+            android:id="@+id/RecommendTimeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendNameTextView"
+            app:layout_constraintStart_toEndOf="@id/RecommendTimeTextView"
+            />
+
+        <TextView
+            android:id="@+id/RecommendDifficultyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Difficulty : "
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendTimeTextView"
+            app:layout_constraintStart_toStartOf="@id/RecommendNameTextView"
+            />
+
+        <TextView
+            android:id="@+id/RecommendDifficultyValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendTimeTextView"
+            app:layout_constraintStart_toEndOf="@id/RecommendDifficultyTextView"
+            />
+
+
+        <Button
+            android:id="@+id/ToCalendarButton"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:text="Add to Calendar"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/main"
+            android:padding="0dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendDifficultyTextView"
+            app:layout_constraintStart_toStartOf="@id/RecommendTimeTextView" />
+
+
+        <TextView
+            android:id="@+id/RecommendDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/ToCalendarButton"
+            app:layout_constraintStart_toStartOf="@id/RecommendNameTextView"
+            />
+
+        <TextView
+            android:id="@+id/RecommendDescriptionValue"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendDescriptionTextView"
+            app:layout_constraintStart_toStartOf="@id/RecommendDescriptionTextView"
+            />
+
+        <TextView
+            android:id="@+id/RecommendCautionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Caution"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendDescriptionValue"
+            app:layout_constraintStart_toStartOf="@id/RecommendNameTextView"
+            />
+
+        <TextView
+            android:id="@+id/RecommendCautionValue"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendCautionTextView"
+            app:layout_constraintStart_toStartOf="@id/RecommendDescriptionValue"
+            />
+
+        <TextView
+            android:id="@+id/RecommendReferenceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reference"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendCautionValue"
+            app:layout_constraintStart_toStartOf="@id/RecommendNameTextView"
+            />
+
+        <TextView
+            android:id="@+id/RecommendReferenceValue"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/RecommendReferenceTextView"
+            app:layout_constraintStart_toStartOf="@id/RecommendDescriptionValue"
+
+            />
+        <Button
+            android:id="@+id/CloseButton"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="X"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+
+            android:layout_marginBottom="32dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

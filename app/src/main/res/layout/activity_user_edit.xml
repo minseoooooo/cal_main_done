@@ -6,19 +6,32 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     tools:ignore="SpeakableTextPresentCheck"
-    tools:context=".Activity.UserEditActivity">
+    tools:context=".activity.UserEditActivity">
+
+    <!--tool bar 삽입-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        tools:context=".activity.MainActivity"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
+        <include layout="@layout/toolbar" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
         android:id="@+id/userInfo"
         style="@style/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:text="유저 정보 입력"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 
     <TextView
@@ -348,19 +361,7 @@
         app:layout_constraintGuide_end="288dp" />
 
 
-    <!--tool bar 삽입-->
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        tools:context=".Activity.MainActivity"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints">
-
-        <include layout="@layout/toolbar" />
 
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
