@@ -14,17 +14,25 @@ import com.example.solutionchallenge.Constants.buttonIds
 import com.example.solutionchallenge.GENDER
 import com.example.solutionchallenge.NICKNAME
 import com.example.solutionchallenge.PHYSICAL_ABILITY_LEVEL
+import com.example.solutionchallenge.ServiceCreator
+import com.example.solutionchallenge.datamodel.RequestUserInfoData
+import com.example.solutionchallenge.datamodel.ResponseUserInfoData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class UserEditActivity : AppCompatActivity() {
     private lateinit var binding : ActivityUserEditBinding
-
     private val buttonStateMap = mutableMapOf<Int, Boolean>() // 버튼 상태를 저장하는 맵
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
 
         for (buttonId in buttonIds) {
             buttonStateMap[buttonId] = true // 초기 상태: 핑크색
@@ -60,29 +68,22 @@ class UserEditActivity : AppCompatActivity() {
         val nickname = binding.nicknameEditText.text.toString()
         val gender = getGender()
         val physicalAbilityLevel = getPhysical_ability_level()
+        val core = buttonStateMap[R.id.core] ?: false
+        val rightUpperArm = buttonStateMap[R.id.right_upper_arm_button] ?: false
+        val rightLowerArm = buttonStateMap[R.id.right_upper_arm_button] ?: false
+        val leftUpperArm = buttonStateMap[R.id.right_upper_arm_button] ?: false
+        val leftLowerArm = buttonStateMap[R.id.left_lower_arm_button] ?: false
+        val rightUpperLeg = buttonStateMap[R.id.right_upper_leg_button] ?: false
+        val rightLowerLeg = buttonStateMap[R.id.right_upper_leg_button] ?: false
+        val leftUpperLeg = buttonStateMap[R.id.right_upper_leg_button] ?: false
+        val leftLowerLeg = buttonStateMap[R.id.left_lower_leg_button] ?: false
 
         if (nickname.isNotEmpty() && gender.isNotEmpty() && physicalAbilityLevel.isNotEmpty()) {
-            // 모든 정보가 입력된 경우에만 저장 수행
-            with(getSharedPreferences("userInformation", Context.MODE_PRIVATE).edit()) {
-                putString(NICKNAME, nickname)
-                putString(GENDER, gender)
-                putString(PHYSICAL_ABILITY_LEVEL, physicalAbilityLevel)
+            //*** 여기서 call.enqueue 해서 postUserInfo() 하는 거 *******
 
-                apply()
-            }
 
-            //저장된 정보 출력
-            Log.d("UserEditActivity", "User information saved: " +
-                    "Nickname: $nickname, " +
-                    "Gender: $gender, " +
-                    "Physical Ability Level: $physicalAbilityLevel"
-            )
-            for (buttonId in buttonIds) {
-                val buttonName = resources.getResourceEntryName(buttonId)
-                val statusMessage = "버튼 ID: $buttonName, 상태: ${buttonStateMap[buttonId]}"
-                Log.d("UserEditActivity", statusMessage)
-            }
         }
+
         else { // 닉네임, 성별, 신체 기능 중 뭔가 입력 안 했을 때
             // 사용자에게 모든 정보를 입력하라는 Toast 메시지 표시
             Toast.makeText(this, "모든 정보를 입력하세요.", Toast.LENGTH_SHORT).show()

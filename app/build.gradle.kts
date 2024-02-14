@@ -50,6 +50,7 @@ android {
 
 dependencies {
 
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -70,6 +71,7 @@ dependencies {
     //implementation("com.google.firebase:firebase-auth:22.0.0")
     implementation("com.google.firebase:firebase-bom:32.0.0")
     implementation("com.google.android.gms:play-services-auth:20.5.0")
+    //implementation ("com.google.firebase:firebase-admin:8.1.0")
 
 
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
@@ -89,12 +91,11 @@ dependencies {
     // 뷰모델 생성하기 쉽게
     implementation("androidx.fragment:fragment-ktx:1.1.0")
 
-    //메인 슬라이딩 view
-    implementation ("androidx.viewpager2:viewpager2:1.0.0")
-    implementation ("me.relex:circleindicator:2.1.6")
+    
 
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.3.5")
-
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
 }

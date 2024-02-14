@@ -1,5 +1,6 @@
 package com.example.solutionchallenge
 
+import com.example.solutionchallenge.dao.ExerciseDao
 import com.example.solutionchallenge.datamodel.Exercise
 import kotlinx.coroutines.flow.Flow
 
