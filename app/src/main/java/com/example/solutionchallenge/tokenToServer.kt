@@ -13,7 +13,8 @@ import retrofit2.Response
 
 public class TokenToServer(private val accessToken: String) {
 
-    var isMember = false // 기본값은 실패로 초기화
+    var userEditDone: Boolean = false // 화면 전환을 UserEdit으로 시킬지 Main으로 시킬지 판단하려고 쓰는 변수
+    var member: Boolean = false // 화면 전환을 UserEdit으로 시킬지 Main으로 시킬지 판단하려고 쓰는 변수
 
 
     public fun sendTokenToServer(completion: (Boolean, String?) -> Unit) {
@@ -36,9 +37,9 @@ public class TokenToServer(private val accessToken: String) {
                         Log.d(TAG, "Access Token: ${responseData.data.accessToken}")
                         Log.d(TAG, "Is Member: ${responseData.data.member}")
 
-                        isMember = responseData.data.member // responseData.data.member 값을 그대로 success에 대입
+                        member = responseData.data.member // responseData.data.member 값을 그대로 success에 대입
                         var receviedAccessToken = responseData.data.accessToken
-                        completion(isMember, receviedAccessToken )
+                        completion(responseData.data.member, responseData.data.accessToken)
 
                     } else {
                         Log.d("NetworkTest","sth wrong")
@@ -54,4 +55,6 @@ public class TokenToServer(private val accessToken: String) {
             }
         })
     }
+
+
 }

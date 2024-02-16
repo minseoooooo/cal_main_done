@@ -41,6 +41,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.json.JSONObject
 import java.io.IOException
 
@@ -51,6 +52,11 @@ class LogInActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var startGoogleLoginForResult: ActivityResultLauncher<Intent>
+
+    private var loginDone: Boolean = false // 로그인 성공 여부를 추적하는 변수
+    private var userEditDone: Boolean = false // 화면 전환을 UserEdit으로 시킬지 Main으로 시킬지 판단하려고 쓰는 변수
+    private var member: Boolean = false // 화면 전환을 UserEdit으로 시킬지 Main으로 시킬지 판단하려고 쓰는 변수
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +111,9 @@ class LogInActivity : AppCompatActivity() {
     }
     private fun getTokenFromGoogle(authCode: String?) {
         val client = OkHttpClient()
+        //val client = createHttpClient()
+
+
 
         // 요청 바디 생성
         val requestBody = FormBody.Builder()
@@ -136,13 +145,19 @@ class LogInActivity : AppCompatActivity() {
 
                     // 응답 데이터를 JSON으로 파싱
                     val jsonObject = JSONObject(responseData)
-                    val accessToken = jsonObject.optString("access_token")
+                    val accessToken = jsonObject.optString("access_token") //이게 access token 두개중에 첫번째
+                    Log.d("json파싱", "access_token from oauth: "+ accessToken)
+
 
 
                     val tokenToServer = TokenToServer(accessToken.toString())
                     tokenToServer.sendTokenToServer { isMember, receviedAccessToken ->
-                        updateUI(null)
-                        fun createHttpClient(): OkHttpClient {
+                        //updateUI(null) 이거 왜 제거하라 그러지..?
+                        member = isMember // 콜백으로 받은 isMember 값을 LoginActivity의 member 변수에 할당합니다.
+                        // updateUI 메서드 호출은 onResponse 메서드에서 처리될 것입니다.
+                        updateUI(Firebase.auth.currentUser) // 로그인 정보는 이미 가져왔으므로 currentUser를 전달합니다.
+
+                        fun createHttpClient(): OkHttpClient { // ?? 이건 왜 있는거쥐..? 왜 안쓰이지..?
                             return OkHttpClient.Builder()
                                 .addInterceptor(Interceptor { chain ->
                                     val original: Request = chain.request()
@@ -152,12 +167,12 @@ class LogInActivity : AppCompatActivity() {
                                     chain.proceed(request)
                                 })
                                 .build()
-                        if (isMember) {
+                        /*if (isMember) { //-> 수정 필요한 부분 여기부터
                             startActivity(Intent(this@LogInActivity,MainActivity::class.java))
 
                         } else {
                             startActivity(Intent(this@LogInActivity,UserEditActivity::class.java))
-                        }
+                        }*/ //-> 수정 필요한 부분 여기까지
                         }
                     }
                 }
@@ -176,6 +191,7 @@ class LogInActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    loginDone = true // 로그인이 성공하면 true로 설정
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "idtoken: $idToken")
                     val user = auth.currentUser
@@ -183,14 +199,16 @@ class LogInActivity : AppCompatActivity() {
 
 
                 } else {
+                    loginDone = false // 로그인이 실패하면 false로 설정
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    updateUI(null)
 
                 }
             }
             .addOnFailureListener { exception ->
                 Log.e(TAG, "firebaseAuthWithGoogle:failure", exception)
-                updateUI(null)
+                //updateUI(null)
             }
     }
 
@@ -200,6 +218,43 @@ class LogInActivity : AppCompatActivity() {
         // FirebaseUser 데이터에 따른 UI 작업
         binding.userName.text = user?.displayName
 
+
+        // 여기에서 loginDone 변수를 기반으로 추가적인 UI 작업을 수행할 수 있습니다.
+        if (loginDone) {
+            ////// 로그인이 성공한 경우
+
+            if (member) { // i) response의 member가 true이면 MainActivity로 화면 전환
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else { // ii) response의 member 가 false이면 UserEditActivity로 화면 전환
+                val intent = Intent(this, UserEditActivity::class.java)
+                startActivity(intent)
+            }
+
+            finish() // 현재 액티비티 종료
+        } else {
+            // 로그인이 실패한 경우에 대한 추가적인 작업 수행
+
+        }
+
+
+    }
+
+    private fun createHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(Interceptor { chain ->
+                val request: Request = chain.request()
+                Log.d("Request", request.toString())
+
+                val response: Response = chain.proceed(request)
+                val responseBodyString = response.body?.string()
+                Log.d("Response", responseBodyString ?: "")
+
+                response.newBuilder()
+                    .body(responseBodyString?.toResponseBody(response.body?.contentType()))
+                    .build()
+            })
+            .build()
     }
 
 

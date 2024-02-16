@@ -74,7 +74,7 @@ dependencies {
     //implementation ("com.google.firebase:firebase-admin:8.1.0")
 
 
-    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
     val roomVersion = "2.6.1"
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -91,11 +91,15 @@ dependencies {
     // 뷰모델 생성하기 쉽게
     implementation("androidx.fragment:fragment-ktx:1.1.0")
 
-    
 
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    //OK HTTP interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:4.8.0")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.1")
+
 
 }

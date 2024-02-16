@@ -17,21 +17,20 @@ import com.example.solutionchallenge.PHYSICAL_ABILITY_LEVEL
 import com.example.solutionchallenge.ServiceCreator
 import com.example.solutionchallenge.datamodel.RequestUserInfoData
 import com.example.solutionchallenge.datamodel.ResponseUserInfoData
+import com.example.solutionchallenge.datamodel.ResponseUserLoginData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class UserEditActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityUserEditBinding
+    private lateinit var binding: ActivityUserEditBinding
     private val buttonStateMap = mutableMapOf<Int, Boolean>() // 버튼 상태를 저장하는 맵
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
 
         for (buttonId in buttonIds) {
@@ -57,11 +56,10 @@ class UserEditActivity : AppCompatActivity() {
     }
 
     private fun setButtonColor(button: Button, isBlue: Boolean) {
-        val colorRes = if (isBlue) android.R.color.holo_blue_light else android.R.color.holo_red_light
+        val colorRes =
+            if (isBlue) android.R.color.holo_blue_light else android.R.color.holo_red_light
         button.setBackgroundColor(ContextCompat.getColor(this, colorRes))
     }
-
-
 
 
     private fun saveUserData() {
@@ -78,20 +76,56 @@ class UserEditActivity : AppCompatActivity() {
         val leftUpperLeg = buttonStateMap[R.id.right_upper_leg_button] ?: false
         val leftLowerLeg = buttonStateMap[R.id.left_lower_leg_button] ?: false
 
+        val requestUserInfoData = RequestUserInfoData(
+            nickname,
+            gender,
+            physicalAbilityLevel,
+            core,
+            rightUpperArm,
+            rightLowerArm,
+            leftUpperArm,
+            leftLowerArm,
+            rightUpperLeg,
+            rightLowerLeg,
+            leftUpperLeg,
+            leftLowerLeg
+        )
+        val call: Call<ResponseUserInfoData> =
+            ServiceCreator.everyHealthService.postUserInfo(requestUserInfoData)
+
+
         if (nickname.isNotEmpty() && gender.isNotEmpty() && physicalAbilityLevel.isNotEmpty()) {
             //*** 여기서 call.enqueue 해서 postUserInfo() 하는 거 *******
+            call.enqueue(object : Callback<ResponseUserInfoData> {
+                override fun onResponse(
+                    call: Call<ResponseUserInfoData>,
+                    response: Response<ResponseUserInfoData>
+                ) {
+                    if (response.isSuccessful) {
+                        //유저 신체 정보 전송 성공
+                        Log.d(TAG, "유저 신체 정보 전송 성공")
+                    } else {
+                        Log.d(TAG, "유저 신체 정보 전송 실패")
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ResponseUserInfoData>, t: Throwable) {
+                    // 통신 실패 시 처리
+                    Log.e("NetworkTest", "error:$t")
+                }
+            })
 
 
-        }
-
-        else { // 닉네임, 성별, 신체 기능 중 뭔가 입력 안 했을 때
+        } else { // 닉네임, 성별, 신체 기능 중 뭔가 입력 안 했을 때
             // 사용자에게 모든 정보를 입력하라는 Toast 메시지 표시
             Toast.makeText(this, "모든 정보를 입력하세요.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun getGender(): String {
-        val gender = if(binding.GenderFemale.isChecked) "F" else if (binding.GenderNone.isChecked) "N" else "M"
+        val gender =
+            if (binding.GenderFemale.isChecked) "F" else if (binding.GenderNone.isChecked) "N" else "M"
         return "$gender"
     }
 
@@ -100,15 +134,19 @@ class UserEditActivity : AppCompatActivity() {
         val checkedRadioButtonId: Int = radioGroup.checkedRadioButtonId
 
         return when (checkedRadioButtonId) {
-            R.id.impossibleToSit -> "Unable to sit"
-            R.id.possibleToSit -> "Able to sit"
-            R.id.possibleToStand -> "Able to stand"
-            R.id.possibleToWalk -> "Able to walk"
-            R.id.possibleToRun -> "Able to run"
+            R.id.impossibleToSit -> "UNABLE_TO_SIT"
+            R.id.possibleToSit -> "ABLE_TO_SIT"
+            R.id.possibleToStand -> "ABLE_TO_STAND"
+            R.id.possibleToWalk -> "ABLE_TO_WALK"
+            R.id.possibleToRun -> "ABLE_TO_RUN"
             else -> {
                 Toast.makeText(this, "신체 기능을 선택해주세요.", Toast.LENGTH_SHORT).show()
                 "Unable to sit" // 기본값
             }
         }
+    }
+
+    companion object {
+        const val TAG = "UserEditActivity"
     }
 }
