@@ -1,22 +1,19 @@
 package com.example.solutionchallenge.activity
 
+//import com.example.solutionchallenge.datamodel.exerciseList
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-
 import com.example.solutionchallenge.R
-import com.example.solutionchallenge.RecommendationOfTodayDialog
-import com.example.solutionchallenge.databinding.ActivityMainBinding
-import com.example.solutionchallenge.databinding.FragmentRecommendListBinding
-
-import com.example.solutionchallenge.datamodel.Exercise
-import com.example.solutionchallenge.datamodel.exerciseList
+import com.example.solutionchallenge.ServiceCreator
+import com.example.solutionchallenge.datamodel.ResponseExerciseRecommendedData
 import com.example.solutionchallenge.fragment.RecommendListFragment
-import com.google.android.material.datepicker.MaterialCalendar
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-
-import kotlin.random.Random
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,9 +22,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val PERbutton: Button = findViewById(R.id.ToPERlistButton)
-        val TodayButton: Button = findViewById(R.id.ToTodayERButton)
-        val calendarInMain: MaterialCalendarView = findViewById(R.id.calendarInMain)
+        val PERbutton: Button = findViewById(R.id.ToPERlistButton) //개인운동 추천 버튼
+        val TodayButton: Button = findViewById(R.id.ToTodayERButton) //오늘의운동 추천 버튼
+        val calendarInMain: MaterialCalendarView =
+            findViewById(R.id.calendarInMain) //메인화면에서 캘린더 클릭시 캘린더로 이동x
         PERbutton.setOnClickListener {
             val fragment = RecommendListFragment()
             supportFragmentManager.beginTransaction()
@@ -37,9 +35,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         TodayButton.setOnClickListener {
-            val randomExercise = getRandomExercise()
-            val dialog = RecommendationOfTodayDialog(this, randomExercise)
-            dialog.show()
+            val callTest: Call<ResponseExerciseRecommendedData> =
+                ServiceCreator.everyHealthService.getExerciseRecommended()
+            callTest.enqueue(object : Callback<ResponseExerciseRecommendedData>{
+                override fun onResponse(
+                    call: Call<ResponseExerciseRecommendedData>,
+                    response: Response<ResponseExerciseRecommendedData>
+                ) {
+                    if (response.isSuccessful) {
+                        //오늘의 추천 운동 불러오기 성공
+                        Log.d(TAG, "오늘의 추천 운동 불러오기 성공")
+                    } else {
+                        Log.d(TAG, "오늘의 추천 운동 불러오기 실패")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseExerciseRecommendedData>, t: Throwable) {
+                    Log.e("NetworkTest", "error:$t")
+                }
+            })
+            //val randomExercise = getRandomExercise()
+            // / 랜덤 운동 반환하는 로직 백에서 구현해두신듯 (오늘의 추천운동 조회)
+            //val dialog = RecommendationOfTodayDialog(this, randomExercise) /// 랜덤 운동 반환하는 로직 백에서 구현해두신듯 (오늘의 추천운동 조회)
+            //dialog.show()
         }
         calendarInMain.setOnClickListener {
             // CalendarActivity로 화면 전환... 이 안된다
@@ -52,9 +70,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun getRandomExercise(): Exercise {
-        val randomIndex = Random.nextInt(exerciseList.size)
-        return exerciseList[randomIndex]
-    }
+    /// 랜덤 운동 반환하는 로직 백에서 구현해두신듯 (오늘의 추천운동 조회)
+    /*
+        private fun getRandomExercise(): Exercise {
+            val randomIndex = Random.nextInt(exerciseList.size)
+            return exerciseList[randomIndex]
+        }
+    */
 
+    companion object {
+        const val TAG = "MainActivity"
+    }
 }

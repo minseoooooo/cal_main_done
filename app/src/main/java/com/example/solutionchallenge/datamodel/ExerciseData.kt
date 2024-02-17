@@ -1,5 +1,6 @@
 package com.example.solutionchallenge.datamodel
 
+/*
 
 
 val exerciseList = mutableListOf<Exercise>().apply {
@@ -65,3 +66,4 @@ val exerciseList = mutableListOf<Exercise>().apply {
     )
 
 }
+*/
