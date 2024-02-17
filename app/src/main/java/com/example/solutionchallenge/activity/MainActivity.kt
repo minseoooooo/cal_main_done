@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             dialog.show()
         }
         calendarInMain.setOnClickListener {
-            // CalendarActivity로 화면 전환... 이 안된다.
+            // CalendarActivity로 화면 전환... 이 안된다
             val intent = Intent(this, CalendarActivity::class.java)
             startActivity(intent)
             finish() // 현재 액티비티 종료
