@@ -91,7 +91,8 @@ dependencies {
     // 뷰모델 생성하기 쉽게
     implementation("androidx.fragment:fragment-ktx:1.1.0")
 
-
+    //material 캘린더뷰
+    implementation("com.prolificinteractive:material-calendarview:1.4.3")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")

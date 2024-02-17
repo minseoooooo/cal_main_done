@@ -19,9 +19,15 @@ interface EveryHealthService { //로그인시 사용
 
     //@Header("Authorization: your auth token")
     @Headers("Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcwODAxMDYzMCwiZXhwIjoxNzA4MDk3MDMwfQ.3ekTZY7dCWjxuWuPiztiTnqDFVDh5uzNq4wEJ5_6TcTkJKXf3aQfYI-oJiFnBxOTR3OlA8Idl4I9v97K8vSSKQ")
+    //@Headers("Authorization: Bearer ${accessToken}")
     @POST("user/info")
     fun postUserInfo(
         @Body body : RequestUserInfoData
     ) : Call<ResponseUserInfoData>
 
+
+
+
+
 }
+

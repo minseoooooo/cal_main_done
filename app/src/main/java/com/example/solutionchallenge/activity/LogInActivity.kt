@@ -167,12 +167,7 @@ class LogInActivity : AppCompatActivity() {
                                     chain.proceed(request)
                                 })
                                 .build()
-                        /*if (isMember) { //-> 수정 필요한 부분 여기부터
-                            startActivity(Intent(this@LogInActivity,MainActivity::class.java))
 
-                        } else {
-                            startActivity(Intent(this@LogInActivity,UserEditActivity::class.java))
-                        }*/ //-> 수정 필요한 부분 여기까지
                         }
                     }
                 }

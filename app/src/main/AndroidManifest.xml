@@ -24,6 +24,9 @@
             android:name=".activity.UserEditActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.CalendarActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.LogInActivity"
             android:exported="true" >
             <intent-filter>

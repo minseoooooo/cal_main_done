@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/exerciseEditView"
+            android:id="@+id/planEditView"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -36,7 +36,7 @@
             android:inputType="textPersonName"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/exerciseEditView"
+            app:layout_constraintStart_toEndOf="@+id/planEditView"
             app:layout_constraintTop_toTopOf="parent" />
 
 
